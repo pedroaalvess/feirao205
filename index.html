@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Página com Container Centralizado</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f2f2f2;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    .barra-superior,
+    .barra-inferior {
+      width: 100%;
+      height: 8px;
+      background-color: #e80070;
+      position: absolute;
+      left: 0;
+    }
+
+    .barra-superior {
+      top: 0;
+    }
+
+    .barra-inferior {
+      bottom: 0;
+    }
+
+    .aviso {
+      margin-top: 28px;
+      margin-bottom: 5px;
+      font-size: 14px;
+      color: #333;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    .icone-flutuante {
+      width: 70px;
+      height: 70px;
+      background-image: url('https://i.imgur.com/1id1avW.png');
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      top: 15px;
+      z-index: 2;
+      animation: flutuar 3s ease-in-out infinite;
+    }
+
+    @keyframes flutuar {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .container {
+      background-color: #ffffff;
+      width: 90%;
+      max-width: 500px;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .titulo-roxo {
+      color: #e80070;
+      font-size: 24px;
+      margin: 0;
+      text-align: center;
+    }
+
+    .descricao {
+      font-size: 16px;
+      color: #444;
+      margin-top: 15px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .botao-consulta {
+      margin-top: 10px;
+      background-color: #e80070;
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      font-size: 16px;
+      border-radius: 25px;
+      cursor: pointer;
+      width: auto;
+      min-width: 180px;
+    }
+
+    .botao-consulta:hover {
+      background-color: #cc0060;
+    }
+
+    .texto-lgpd {
+      margin-top: 15px;
+      background-color: rgba(232, 0, 112, 0.1);
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      color: #333;
+      border-left: 5px solid #e80070;
+      box-sizing: border-box;
+    }
+
+    .titulo-secundario {
+      font-weight: bold;
+      font-size: 18px;
+      margin-top: 25px;
+      margin-bottom: 0;
+      color: #222;
+      text-align: left;
+      width: 100%;
+    }
+
+    .texto-sobre {
+      font-size: 14px;
+      color: #444;
+      text-align: left;
+      margin-top: 0;
+      width: 100%;
+    }
+
+    .rodape {
+      margin: 20px;
+      font-size: 12px;
+      color: #555;
+      text-align: center;
+      padding: 0 10px;
+      box-sizing: border-box;
+      width: 100%;
+    }
+
+    .rodape a {
+      color: #555;
+      text-decoration: none;
+      margin: 0 5px;
+      cursor: pointer;
+    }
+
+    .rodape a:hover {
+      text-decoration: underline;
+    }
+
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      max-width: 90%;
+      z-index: 1000;
+    }
+
+    .popup h3 {
+      margin-top: 0;
+    }
+
+    .popup-close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.5);
+      z-index: 999;
+    }
+
+    @media (max-width: 480px) {
+      .container { padding: 20px; }
+      .titulo-roxo { font-size: 20px; }
+      .descricao, .texto-lgpd, .titulo-secundario, .texto-sobre { font-size: 14px; }
+      .botao-consulta { font-size: 14px; padding: 10px; min-width: 140px; }
+      .rodape { font-size: 11px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="barra-superior"></div>
+  <div class="aviso">Plataforma independente e educativa. Sem vínculo com bancos ou órgãos oficiais.</div>
+  <div class="icone-flutuante"></div>
+  <div class="container">
+    <h1 class="titulo-roxo">Consulte gratuitamente seu CPF</h1>
+    <p class="descricao">Descubra se existem registros financeiros vinculados e veja como regularizá-los.</p>
+    <button class="botao-consulta" onclick="window.location.href='../consulta';">Iniciar consulta</button>
+    <p class="texto-lgpd">Esta verificação é gratuita e educativa. Nenhum dado sensível é solicitado. LGPD em conformidade.</p>
+    <h2 class="titulo-secundario">Sobre a plataforma.</h2>
+    <p class="texto-sobre">Nosso objetivo é facilitar o entedimento sobre registros financeiros através de uma abordagem educativa e informativa. Esta página não intermedia acordos nem solicita qualquer forma de pagamento.</p>
+  </div>
+  <div class="rodape">
+    Consulta Cidadã® - 2025 | Entidade de Apoio Educacional |
+    <a onclick="showPopup('privacidade')">Políticas de Privacidade</a> |
+    <a onclick="showPopup('termos')">Termos de Uso</a> |
+    <a onclick="showPopup('seguranca')">Segurança Digital</a>
+  </div>
+  <div class="barra-inferior"></div>
+
+  <div class="overlay" id="overlay" onclick="hidePopup()"></div>
+  <div class="popup" id="popup-privacidade">
+    <span class="popup-close" onclick="hidePopup()">&times;</span>
+    <h3>Políticas de Privacidade</h3>
+    <p>Esta plataforma respeita sua privacidade e não coleta dados sensíveis. Todas as informações são processadas de forma anônima e segura, em conformidade com a LGPD.</p>
+  </div>
+  <div class="popup" id="popup-termos">
+    <span class="popup-close" onclick="hidePopup()">&times;</span>
+    <h3>Termos de Uso</h3>
+    <p>Ao utilizar esta plataforma, o usuário concorda que se trata de um serviço informativo e educativo, sem vínculo com instituições financeiras ou governamentais.</p>
+  </div>
+  <div class="popup" id="popup-seguranca">
+    <span class="popup-close" onclick="hidePopup()">&times;</span>
+    <h3>Segurança Digital</h3>
+    <p>Adotamos práticas seguras para garantir a integridade e o sigilo das informações consultadas, mesmo sem coleta de dados pessoais.</p>
+  </div>
+
+  <script>
+    function showPopup(id) {
+      document.getElementById('overlay').style.display = 'block';
+      document.querySelectorAll('.popup').forEach(p => p.style.display = 'none');
+      document.getElementById('popup-' + id).style.display = 'block';
+    }
+    function hidePopup() {
+      document.getElementById('overlay').style.display = 'none';
+      document.querySelectorAll('.popup').forEach(p => p.style.display = 'none');
+    }
+  </script>
+</body>
+</html>

